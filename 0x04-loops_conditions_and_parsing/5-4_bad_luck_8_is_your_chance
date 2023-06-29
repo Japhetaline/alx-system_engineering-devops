@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+#Script that print Best School but print badluck in 4th iteration
+#and goodluck in 8th iteration.
+
+j=1
+while ((j <= 10));
+do
+	if ((j == 4));
+	then
+		echo "bad luck"
+	elif ((j == 8));
+	then
+		echo "good luck"
+	else
+		echo "Best School"
+	fi
+	((j+=1))
+done
