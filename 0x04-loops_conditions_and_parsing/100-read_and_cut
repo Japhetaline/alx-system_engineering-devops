@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+#read a file
+input="/etc/passwd"
+while IFS= read -r thread;
+do
+	echo "$thread" | cut -f1,3,6 -d':'
+done < $input
