@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+#Print information about school file
+
+file_path="school"
+
+if [[ -e "$file_path" ]];
+then
+	echo "School file exists."
+
+	if [[ -s "$file_path" ]];
+	then
+		echo "School file is not empty."
+	else
+		echo "School file is empty."
+	fi
+	if [[ -f "$file_path" ]];
+	then
+		echo "School file is a regular file."
+fi
+else
+	echo "School file does not exit."
+	fi
