@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+#Display content of the current directory in a list format
+for k in *;
+do
+	echo "$k" | cut -f2 -d'-'
+done
