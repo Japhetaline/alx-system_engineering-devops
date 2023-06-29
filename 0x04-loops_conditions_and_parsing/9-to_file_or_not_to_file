@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #Print information about school file
 
-file_path="path/to/school/file.txt"
+file_path="school"
 
 if [[ -e "$file_path" ]];
 then
