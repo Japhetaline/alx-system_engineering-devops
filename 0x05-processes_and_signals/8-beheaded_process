@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+#Kill a proceess instead of trapping
+
+kill_pid=$(pgrep -a "bash.*7-highlander")
+
+if [[ -n "$kill_pid" ]];
+then
+	echo "Process killed"
+	kill "$kill_pid"
+fi
