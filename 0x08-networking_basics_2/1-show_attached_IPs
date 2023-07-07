@@ -1,11 +1,4 @@
 #!/usr/bin/env bash
 #This script will be used as an ip set up script, works in docker
-interfaces=$(ifconfig -a | grep -oE "^[a-zA-Z0-9]+:" | sed 's/.$//')
 
-for interface in $interfaces;
-do
-	ipv4=$(ifconfig $interface | awk '/inet /{print $2}')
-	echo "Interface: $interface"
-	echo "IPv4 Address: $ipv4"
-	echo
-done
+ifconfig | grep 'inet addr' | cut -d':' -f2 | cut -d' ' -f1
