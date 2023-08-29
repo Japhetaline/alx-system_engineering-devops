@@ -2,11 +2,18 @@
 # Configure a new Nginx server so that /redirect_me is redirecting to another page.
 # The redirection must be a “301 Moved Permanently”
 
-sudo apt-get -y update
-sudo apt-get -y upgrade
-sudo apt-get -y install nginx
-sudo service nginx start
-new_string="\\\trewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;"
-sudo sed -i "19i $new_string" /etc/nginx/sites-available/default
-sudo service nginx restart
-sudo service nginx reload
+sudo apt update
+sudo apt install nginx -y
+sudo tee /etc/nginx/sites-available/redirect.conf > /dev/null <<EOT
+server {
+    listen 80;
+    server_name japhetaline.tech;
+
+    location /redirect_me {
+        return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4
+    }
+}
+EOT
+sudo ln -s /etc/nginx/sites-available/redirect.conf /etc/nginx/sites-enabled/
+sudo nginx -t
+sudo service reload nginx
