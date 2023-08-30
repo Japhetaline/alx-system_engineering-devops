@@ -4,16 +4,22 @@
 
 sudo apt update
 sudo apt install nginx -y
-sudo tee /etc/nginx/sites-available/redirect.conf > /dev/null <<EOT
+echo "Redirecting to another page..." | sudo tee /var/www/html/redirect.html
+sudo bash -c 'cat > /etc/nginx/sites-available/redirect' <<EOL
 server {
     listen 80;
-    server_name japhetaline.tech;
+    server_name japhetaline.tech www.japhetaline.tech;
 
     location /redirect_me {
         return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4
+
+    location / {
+        # Your regular location block configuration
+        root /var/www/html;
+        index index.html index.htm;
     }
 }
-EOT
-sudo ln -s /etc/nginx/sites-available/redirect.conf /etc/nginx/sites-enabled/
+EOL
+sudo ln -s /etc/nginx/sites-available/redirect /etc/nginx/sites-enabled/
 sudo nginx -t
-sudo service reload nginx
+sudo systemctl reload nginx
