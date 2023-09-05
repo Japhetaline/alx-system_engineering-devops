@@ -5,13 +5,19 @@ apt-get install --no-install-recommends software-properties-common
 add-apt-repository ppa:vbernat/haproxy-2.8
 apt-get -y update
 apt-get install haproxy=2.8.\*
-echo "frontend http
+
+server_config=\
+"
+frontend http
         bind *:80
         mode http
         default_backend web-backend
-    backend web-backend
+backend web-backend
         balance roundrobin
-        server 263828-web-01 52.91.125.177
-        server 263828-web-02 52.87.219.254" >> /etc/haproxy/haproxy.cfg
+        server 263828-web-01 52.91.125.177:80 check
+        server 263828-web-02 52.87.219.254:80 check
+"
 
+echo "$server_config" | sudo tee -a /etc/haproxy/haproxy.cfg
+echo "ENABLED=1" | sudo tee -a /etc/default/haproxy
 systemctl haproxy restart
