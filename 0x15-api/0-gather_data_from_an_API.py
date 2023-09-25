@@ -1,6 +1,10 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
+"""
+Created on Mon Sep 25 18:22:14 2023
 
+@author: Damassoh japhet
+"""
 from requests import get
 from sys import argv
 
