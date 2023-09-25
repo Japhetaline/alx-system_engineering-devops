@@ -12,15 +12,15 @@ if __name__ == '__main__':
 
     url = 'https://jsonplaceholder.typicode.com/users/{}/todos'.format(user_id)
     response = get(url)
-    duties = response.json()
-    ready = 0
-    ready_tasks = []
-    for duty in duties:
-        if duty.get('completed'):
-            ready_tasks.append(duty)
-            ready += 1
+    tasks = response.json()
+    done = 0
+    done_tasks = []
+    for task in tasks:
+        if task.get('completed'):
+            done_tasks.append(task)
+            done += 1
 
-    print("Employee {} is done with duties({}/{})"
-            .format(name, ready, len(duties)))
-    for duty in ready_tasks:
-        print("\t {}".format(duty.get('title')))
+    print("Employee {} is done with tasks({}/{}):"
+          .format(name, done, len(tasks)))
+    for task in done_tasks:
+        print("\t {}".format(task.get('title')))
